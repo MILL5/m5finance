@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31025.218
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m5finance", "m5finance\m5finance.csproj", "{D011A4B2-DE39-4BE8-B749-C5EFDD90578F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "m5finance.tests", "m5finance.tests\m5finance.tests.csproj", "{546E9011-4728-4DFF-B79C-4382E530A0EE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D011A4B2-DE39-4BE8-B749-C5EFDD90578F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D011A4B2-DE39-4BE8-B749-C5EFDD90578F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D011A4B2-DE39-4BE8-B749-C5EFDD90578F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D011A4B2-DE39-4BE8-B749-C5EFDD90578F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{546E9011-4728-4DFF-B79C-4382E530A0EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{546E9011-4728-4DFF-B79C-4382E530A0EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{546E9011-4728-4DFF-B79C-4382E530A0EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{546E9011-4728-4DFF-B79C-4382E530A0EE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {36CF6255-4DDA-4D01-8D62-64B784FC90DC}
+	EndGlobalSection
+EndGlobal
