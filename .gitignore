@@ -670,12 +670,34 @@ sketch
 # End of https://www.toptal.com/developers/gitignore/api/react
 
 # Folders specific to HighCharts Service and Client
-/EquityBot.HighChartsSvc/files
-/EquityBot.HighChartsClient/build
 **/*launchSettings.json
 **/*appsettings.local.json
 **/*.runsettings
+**/v16
+**/.vs/*
 
-m5finance.tests/obj/Debug/net5.0/m5finance.tests.csprojAssemblyReference.cache
+**/[Dd]ebug/*
+**/bin/*
+
+.vs
 .vs/m5finance/v16/.suo
-.vs/m5finance/DesignTimeBuild/.dtbcache.v2
+.vs/m5finance/v16/.suo
+m5finance.tests/bin/Debug/net5.0/M5Finance.dll
+m5finance.tests/bin/Debug/net5.0/M5Finance.pdb
+m5finance.tests/bin/Debug/net5.0/M5Finance.Tests.dll
+m5finance.tests/bin/Debug/net5.0/M5Finance.Tests.pdb
+m5finance.tests/bin/Release/net5.0/M5Finance.dll
+m5finance.tests/bin/Release/net5.0/M5Finance.pdb
+m5finance.tests/bin/Release/net5.0/M5Finance.Tests.dll
+m5finance.tests/bin/Release/net5.0/M5Finance.Tests.pdb
+m5finance.tests/obj/Debug/net5.0/m5finance.tests.csproj.CoreCompileInputs.cache
+m5finance.tests/obj/Debug/net5.0/m5finance.tests.csprojAssemblyReference.cache
+m5finance.tests/obj/Debug/net5.0/M5Finance.Tests.dll
+m5finance/obj/Debug/M5Finance.1.0.0-alpha.nuspec
+m5finance/obj/Debug/M5Finance.1.0.0-alpha.symbols.nuspec
+m5finance/obj/m5finance.csproj.nuget.dgspec.json
+m5finance/obj/m5finance.csproj.nuget.g.targets
+m5finance/obj/project.assets.json
+m5finance/obj/project.nuget.cache
+m5finance/obj/Release/M5Finance.1.0.0-alpha.nuspec
+m5finance/obj/Release/M5Finance.1.0.0-alpha.symbols.nuspec
