@@ -1,8 +1,0 @@
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\bin\Release\netstandard2.1\M5Finance.deps.json
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\bin\Release\netstandard2.1\M5Finance.dll
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\bin\Release\netstandard2.1\M5Finance.pdb
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\obj\Release\netstandard2.1\m5finance.AssemblyInfoInputs.cache
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\obj\Release\netstandard2.1\m5finance.AssemblyInfo.cs
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\obj\Release\netstandard2.1\m5finance.csproj.CoreCompileInputs.cache
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\obj\Release\netstandard2.1\M5Finance.dll
-C:\Users\RichCrane\Documents\GitHub\m5finance\m5finance\obj\Release\netstandard2.1\M5Finance.pdb
