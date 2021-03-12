@@ -1,0 +1,57 @@
+﻿<Window xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"  x:Class="Edgar.Explorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Edgar.Explorer"
+        d:DataContext="{d:DesignInstance Type=local:MainViewModel}"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="768" Width="1200" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60" />
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="300" />
+        </Grid.RowDefinitions>
+        <TextBlock Margin="10" Grid.Row="0" HorizontalAlignment="Left" FontSize="24" VerticalAlignment="Center" FontWeight="SemiBold" Text="{Binding FilingsCount, StringFormat='{}{0} Rows'}" />
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
+            <Label Margin="10,0,0,0" MaxHeight="30" FontWeight="SemiBold"
+                   IsEnabled="{Binding AreControlsEnabled, Mode=OneWay}">Filing Type:</Label>
+            <ComboBox Margin="5,10,10,10"
+                      ItemsSource="{Binding FormTypes, Mode=OneWay}"
+                      SelectedItem="{Binding SelectedFormType}"
+                      MaxHeight="30" MinWidth="200"
+                      IsEnabled="{Binding AreControlsEnabled, Mode=OneWay}" />
+            <Button Margin="10" MaxHeight="30" MinWidth="80" IsEnabled="{Binding AreControlsEnabled, Mode=OneWay}" Command="{Binding LoadCommand}">Load Filings</Button>
+        </StackPanel>
+        <DataGrid
+            Margin="0"
+			IsReadOnly="True"
+			AutoGenerateColumns="True"
+            Grid.Row="1"
+            SelectionMode="Single"
+            SelectedItem="{Binding SelectedFiling}"
+            ItemsSource="{Binding Filings, Mode=OneWay}" />
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="300"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBox Margin="10" Grid.RowSpan="3"
+                     Grid.Row="0" Grid.Column="0"
+                     IsReadOnly="True"
+                     VerticalScrollBarVisibility="Visible"
+                     Text="{Binding EdgarFilingText, Mode=OneWay}" />
+            <Label Margin="10,10,0,5" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="1" Content="CIK:"/>
+            <TextBox Margin="10,10,0,5" VerticalContentAlignment="Center" IsReadOnly="True" Width="280" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="2" Text="{Binding SelectedFiling.CIK}"/>
+            <Label Margin="10,0,0,5" FontWeight="SemiBold" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="1" Content="Company Name:"/>
+            <TextBox Margin="10,0,0,5" VerticalContentAlignment="Center" IsReadOnly="True" Width="280" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="2" Text="{Binding SelectedFiling.CompanyName}"/>
+        </Grid>
+    </Grid>
+</Window>
