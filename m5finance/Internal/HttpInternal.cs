@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
 using static Pineapple.Common.Preconditions;
 
@@ -43,6 +44,28 @@ namespace M5Finance
 
             var result = await response.Content.ReadAsStringAsync();
             return result;
+        }
+
+        public static async Task<string> SendAsStringAsync(this HttpClient httpClient, string url, string payLoad)
+        {
+            CheckIsNotNull(nameof(httpClient), httpClient);
+            CheckIsWellFormedUri(nameof(url), url, UriKind.Absolute);
+
+            using (var request = new HttpRequestMessage(HttpMethod.Post, url))
+            {
+                using (var stringContent = new StringContent(payLoad, Encoding.UTF8, "application/json"))
+                {
+                    request.Content = stringContent;
+
+                    using (var response = await httpClient
+                        .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
+                        .ConfigureAwait(false))
+                    {
+                        response.EnsureSuccessStatusCode();
+                        return await response.Content.ReadAsStringAsync();
+                    }
+                }
+            }
         }
     }
 }
