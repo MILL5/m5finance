@@ -9,18 +9,18 @@ using static System.Environment;
 
 namespace M5Finance
 {
-    public class OPENFIGIClient 
+    public class OpenFigiClient 
     {
         private const string OPENFIGI_SECURITIES_URL = "https://api.openfigi.com/v1/mapping";
 
         private readonly HttpClient _client;
 
-        public OPENFIGIClient()
+        public OpenFigiClient()
         {
             _client = HttpInternal.Client;
         }
 
-        public OPENFIGIClient(HttpClient client)
+        public OpenFigiClient(HttpClient client)
         {
             CheckIsNotNull(nameof(client), client);
             _client = client;
@@ -31,9 +31,10 @@ namespace M5Finance
         /// </summary>
         /// <param name="openFigiRequestList">List of parameters</param>
         /// <returns>List of opening figi instruments.</returns>
-        public async Task<IEnumerable<OpenFIGIInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFIGIRequest> openFigiRequestList)
+        public async Task<IEnumerable<OpenFigiInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFigiRequest> openFigiRequestList)
         {
-            CheckIsNotNull(nameof(openFigiRequestList), openFigiRequestList);
+            CheckIsNotNull(nameof(openFigiRequestList), openFigiRequestList.Count());
+            CheckIsNotLessThanOrEqualTo(nameof(openFigiRequestList), openFigiRequestList.Count(), 0);
             CheckIsWellFormedUri(nameof(OPENFIGI_SECURITIES_URL), OPENFIGI_SECURITIES_URL, UriKind.Absolute);
             
             _client.DefaultRequestHeaders.Add("X-OPENFIGI-APIKEY", Environment.GetEnvironmentVariable("OpenFigiApiKey"));

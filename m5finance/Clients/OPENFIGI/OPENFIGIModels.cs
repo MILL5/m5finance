@@ -3,39 +3,39 @@ using System.Collections.Generic;
 
 namespace M5Finance
 {
-    public class OpenFIGIRequest
+    public class OpenFigiRequest
     {
-        private OpenFIGIRequest()
+        private OpenFigiRequest()
         {
 
         }
 
-        public OpenFIGIRequest(string idType, string idValue)
+        public OpenFigiRequest(string idType, string idValue)
             : this()
         {
             this.IdType = idType;
             this.IdValue = idValue;
         }
 
-        public OpenFIGIRequest WithExchangeCode(string exchCode)
+        public OpenFigiRequest WithExchangeCode(string exchCode)
         {
             this.ExchangeCode = exchCode;
             return this;
         }
 
-        public OpenFIGIRequest WithMicCode(string micCode)
+        public OpenFigiRequest WithMicCode(string micCode)
         {
             this.MicCode = micCode;
             return this;
         }
 
-        public OpenFIGIRequest WithCurrency(string currency)
+        public OpenFigiRequest WithCurrency(string currency)
         {
             this.Currency = currency;
             return this;
         }
 
-        public OpenFIGIRequest WithMarketSectorDescription(string marketSectorDescription)
+        public OpenFigiRequest WithMarketSectorDescription(string marketSectorDescription)
         {
             MarketSectorDescription = marketSectorDescription;
             return this;
@@ -60,7 +60,7 @@ namespace M5Finance
         public string MarketSectorDescription { get; set; }
     }
 
-    public class OpenFIGIInstrument
+    public class OpenFigiInstrument
     {
         [JsonProperty("figi")]
         public string figi { get; set; }
@@ -97,7 +97,7 @@ namespace M5Finance
     public class OpenFIGIArrayResponse
     {
         [JsonProperty("data")]
-        public List<OpenFIGIInstrument> Data { get; set; }
+        public List<OpenFigiInstrument> Data { get; set; }
 
         [JsonProperty("error")]
         public string Error { get; set; }

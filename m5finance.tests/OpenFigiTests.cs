@@ -8,22 +8,22 @@ namespace M5Finance.Tests
     [TestClass]
     public class OpenFigiTests
     {
-        private readonly OPENFIGIClient _client;
+        private readonly OpenFigiClient _client;
 
         public OpenFigiTests()
         {
-            _client = new OPENFIGIClient();
+            _client = new OpenFigiClient();
         }
 
         [TestMethod]
         public async Task GetOpenFigiSecuritiesTestAsync()
         {
-            var list = new List<OpenFIGIRequest>()
+            var list = new List<OpenFigiRequest>()
                 {
-                    new OpenFIGIRequest("TICKER", "MSFT"),
+                   new OpenFigiRequest("TICKER", "MSFT"),
                 };
 
-            var figiInstrumentList = await _client.GetFigiMappingsAsync(new List<OpenFIGIRequest>());
+            var figiInstrumentList = await _client.GetFigiMappingsAsync(list);
 
             Assert.IsNotNull(figiInstrumentList);
             Assert.IsTrue(figiInstrumentList.Count() == 40);
