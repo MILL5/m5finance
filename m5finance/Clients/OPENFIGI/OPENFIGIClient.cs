@@ -33,7 +33,7 @@ namespace M5Finance
         /// <returns>List of opening figi instruments.</returns>
         public async Task<IEnumerable<OpenFigiInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFigiRequest> openFigiRequestList)
         {
-            CheckIsNotNull(nameof(openFigiRequestList), openFigiRequestList.Count());
+            CheckIsNotNull(nameof(openFigiRequestList), openFigiRequestList);
             CheckIsNotLessThanOrEqualTo(nameof(openFigiRequestList), openFigiRequestList.Count(), 0);
             CheckIsWellFormedUri(nameof(OPENFIGI_SECURITIES_URL), OPENFIGI_SECURITIES_URL, UriKind.Absolute);
             
@@ -44,17 +44,15 @@ namespace M5Finance
                 NullValueHandling = NullValueHandling.Ignore
             }));
 
-            var result = JsonConvert.DeserializeObject<List<OpenFIGIArrayResponse>>(response);
+            var resultList = JsonConvert.DeserializeObject<List<OpenFIGIArrayResponse>>(response);
 
-            if (result.First().Error == null || !result.First().Error.Any())
+            var openFigiInstrumentsResponse = new List<OpenFigiInstrument>();
+            foreach (var result in resultList.Where(r => r.Data != null))
             {
-                // ToDo: Pending to cover more than one data array
-                return result.First().Data;
+                openFigiInstrumentsResponse.AddRange(result.Data);
             }
-            else
-            {
-                throw new Exception(result.First().Error);
-            }
+
+            return openFigiInstrumentsResponse;
         }
     }
 }
