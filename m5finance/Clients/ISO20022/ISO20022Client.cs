@@ -14,13 +14,13 @@ namespace M5Finance
 
     public class ISO20022Client
     {
-        private string COUNTRY_FIELD = "COUNTRY";
-        private string ISO_COUNTRY_CODE_FIELD = "ISO COUNTRY CODE (ISO 3166)";
-        private string MIC_FIELD = "MIC";
-        private string OPERATING_MIC_FIELD = "OPERATING MIC";
-        private string NAME_FIELD = "NAME-INSTITUTION DESCRIPTION";
-        private string ACRONYM_FIELD = "ACRONYM";
-        private string WEBSITE_FIELD = "WEBSITE";
+        private const string COUNTRY_FIELD = "COUNTRY";
+        private const string ISO_COUNTRY_CODE_FIELD = "ISO COUNTRY CODE (ISO 3166)";
+        private const string MIC_FIELD = "MIC";
+        private const string OPERATING_MIC_FIELD = "OPERATING MIC";
+        private const string NAME_FIELD = "NAME-INSTITUTION DESCRIPTION";
+        private const string ACRONYM_FIELD = "ACRONYM";
+        private const string WEBSITE_FIELD = "WEBSITE";
 
         private const string EXCHANGES_URL = "https://www.iso20022.org/sites/default/files/ISO10383_MIC/ISO10383_MIC.csv";
 

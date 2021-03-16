@@ -40,6 +40,7 @@ namespace M5Finance
             CheckIsNotNull(nameof(exchangeService), exchangeService);
 
             _client = client;
+
             _exchange = exchangeService.GetExchangeByMicCodeAsync(NASDAQ_MICCODE).Result;
 
             CheckIsNotNull("exchange", _exchange);
