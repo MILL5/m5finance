@@ -33,7 +33,7 @@ namespace M5Finance
         /// </summary>
         /// <param name="openFigiRequestList">List of parameters</param>
         /// <returns>List of opening figi instruments.</returns>
-        public async Task<IEnumerable<OpenFigiInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFigiRequest> openFigiRequestList, int index = 0)
+        public async Task<IEnumerable<OpenFigiInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFigiRequest> openFigiRequestList)
         {
             CheckIsNotNull(nameof(openFigiRequestList), openFigiRequestList);
             CheckIsNotLessThanOrEqualTo(nameof(openFigiRequestList), openFigiRequestList.Count(), 0);
