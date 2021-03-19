@@ -18,12 +18,14 @@ namespace M5Finance
         public OpenFigiClient()
         {
             _client = HttpInternal.Client;
+            _client.DefaultRequestHeaders.Add("X-OPENFIGI-APIKEY", Environment.GetEnvironmentVariable("OpenFigiApiKey"));
         }
 
         public OpenFigiClient(HttpClient client)
         {
             CheckIsNotNull(nameof(client), client);
             _client = client;
+            _client.DefaultRequestHeaders.Add("X-OPENFIGI-APIKEY", Environment.GetEnvironmentVariable("OpenFigiApiKey"));
         }
 
         /// <summary>
@@ -31,14 +33,12 @@ namespace M5Finance
         /// </summary>
         /// <param name="openFigiRequestList">List of parameters</param>
         /// <returns>List of opening figi instruments.</returns>
-        public async Task<IEnumerable<OpenFigiInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFigiRequest> openFigiRequestList)
+        public async Task<IEnumerable<OpenFigiInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFigiRequest> openFigiRequestList, int index = 0)
         {
             CheckIsNotNull(nameof(openFigiRequestList), openFigiRequestList);
             CheckIsNotLessThanOrEqualTo(nameof(openFigiRequestList), openFigiRequestList.Count(), 0);
             CheckIsWellFormedUri(nameof(OPENFIGI_SECURITIES_URL), OPENFIGI_SECURITIES_URL, UriKind.Absolute);
             
-            _client.DefaultRequestHeaders.Add("X-OPENFIGI-APIKEY", Environment.GetEnvironmentVariable("OpenFigiApiKey"));
-
             var response = await _client.SendAsStringAsync(OPENFIGI_SECURITIES_URL, JsonConvert.SerializeObject(openFigiRequestList, Formatting.Indented, new JsonSerializerSettings
             {
                 NullValueHandling = NullValueHandling.Ignore

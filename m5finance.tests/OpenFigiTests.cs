@@ -25,7 +25,6 @@ namespace M5Finance.Tests
                    new OpenFigiRequest("ID_BB_GLOBAL", "BBG000DD3805"),
                 };
 
-
             var figiInstrumentList = await _client.GetFigiMappingsAsync(requestList);
 
             Assert.IsNotNull(figiInstrumentList);
