@@ -9,11 +9,11 @@ namespace M5Finance.Tests
     [TestClass]
     public class OpenFigiTests
     {
-        private readonly OpenFigiClient _client;
+        private readonly IOpenFigiClient _client;
 
         public OpenFigiTests()
         {
-            _client = new OpenFigiClient();
+            _client = new OpenFigiClient(Environment.GetEnvironmentVariable("OpenFigiApiKey"));
         }
 
         [TestMethod]
