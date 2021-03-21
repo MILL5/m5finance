@@ -9,11 +9,11 @@ namespace M5Finance.Tests
     [TestClass]
     public class OpenFigiTests
     {
-        private readonly OpenFigiClient _client;
+        private readonly IOpenFigiClient _client;
 
         public OpenFigiTests()
         {
-            _client = new OpenFigiClient();
+            _client = new OpenFigiClient(Environment.GetEnvironmentVariable("OpenFigiApiKey"));
         }
 
         [TestMethod]
@@ -24,7 +24,6 @@ namespace M5Finance.Tests
                    new OpenFigiRequest("ID_BB_GLOBAL", "BBG004P64PB8"),
                    new OpenFigiRequest("ID_BB_GLOBAL", "BBG000DD3805"),
                 };
-
 
             var figiInstrumentList = await _client.GetFigiMappingsAsync(requestList);
 
