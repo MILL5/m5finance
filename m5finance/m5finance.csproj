@@ -12,18 +12,18 @@
     <PackageProjectUrl>https://github.com/MILL5/m5finance</PackageProjectUrl>
     <RepositoryUrl>https://github.com/MILL5/m5finance</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageTags>yahoo;finance;mill5,nyse;nasdaq</PackageTags>
+    <PackageTags>yahoo;finance;mill5,nyse;nasdaq;figi;bloomberg</PackageTags>
     <Description>M5Finance is an aggregation of as many free and public sources of financial data. This includes NASDAQ, NYSE, and NYSE American stock exchanges.</Description>
     <PackageIcon>m5finance.png</PackageIcon>
     <PackageIconUrl />
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<Version>1.0.5-alpha</Version>
+	<Version>1.0.6-alpha</Version>
 	<IncludeSymbols>true</IncludeSymbols>
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	<AssemblyVersion>1.0.5.0</AssemblyVersion>
-	<FileVersion>1.0.5.0</FileVersion>
+	<AssemblyVersion>1.0.6.0</AssemblyVersion>
+	<FileVersion>1.0.6.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
