@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <PackageReference Include="MvvmLightLibsStd10" Version="5.4.1.1" />
-    <PackageReference Include="Telerik.UI.for.Wpf.NetCore" Version="2021.1.223" />
   </ItemGroup>
 
   <ItemGroup>
