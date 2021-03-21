@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Text;
@@ -10,6 +11,11 @@ namespace M5Finance
     internal static class HttpInternal
     {
         private const string USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36 Edg/89.0.774.45";
+
+        private static readonly JsonSerializerSettings _jsonSettings = new JsonSerializerSettings
+        {
+            NullValueHandling = NullValueHandling.Ignore
+        };
 
         static HttpInternal()
         {
@@ -28,11 +34,24 @@ namespace M5Finance
             hc.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
             hc.DefaultRequestHeaders.Add("User-Agent", USER_AGENT);
             hc.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
-            //hc.DefaultRequestHeaders.Add("", "");
             Client = hc;
         }
 
         public static HttpClient Client { get; }
+
+        public static string Serialize<T>(T serializeThis)
+        {
+            CheckIsNotNull(nameof(serializeThis), serializeThis);
+
+            return JsonConvert.SerializeObject(serializeThis, Formatting.Indented, _jsonSettings);
+        }
+
+        public static T Deserialize<T>(string deserializeThis)
+        {
+            CheckIsNotNullOrWhitespace(nameof(deserializeThis), deserializeThis);
+
+            return JsonConvert.DeserializeObject<T>(deserializeThis, _jsonSettings);
+        }
 
         public static async Task<string> DownloadFileAsStringAsync(this HttpClient httpClient, string url)
         {
@@ -46,14 +65,16 @@ namespace M5Finance
             return result;
         }
 
-        public static async Task<string> SendAsStringAsync(this HttpClient httpClient, string url, string payLoad)
+        public static async Task<V> SendAsync<T,V>(this HttpClient httpClient, string url, T sendThis)
         {
             CheckIsNotNull(nameof(httpClient), httpClient);
             CheckIsWellFormedUri(nameof(url), url, UriKind.Absolute);
 
+            var sendThisAsString = Serialize(sendThis);
+
             using (var request = new HttpRequestMessage(HttpMethod.Post, url))
             {
-                using (var stringContent = new StringContent(payLoad, Encoding.UTF8, "application/json"))
+                using (var stringContent = new StringContent(sendThisAsString, Encoding.UTF8, "application/json"))
                 {
                     request.Content = stringContent;
 
@@ -62,7 +83,8 @@ namespace M5Finance
                         .ConfigureAwait(false))
                     {
                         response.EnsureSuccessStatusCode();
-                        return await response.Content.ReadAsStringAsync();
+                        var responseAsString = await response.Content.ReadAsStringAsync();
+                        return Deserialize<V>(responseAsString);
                     }
                 }
             }

@@ -94,7 +94,7 @@ namespace M5Finance
         }
     }
 
-    public class OpenFIGIArrayResponse
+    public class OpenFigiArrayResponse
     {
         [JsonProperty("data")]
         public List<OpenFigiInstrument> Data { get; set; }

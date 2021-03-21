@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using static Pineapple.Common.Preconditions;
+using Pineapple.Threading;
 
 namespace M5Finance
 {
@@ -12,12 +13,29 @@ namespace M5Finance
     {
         private const string OPENFIGI_SECURITIES_URL = "https://api.openfigi.com/v1/mapping";
         private const string OPENFIGI_API_KEY_HEADER_NAME = "X-OPENFIGI-APIKEY";
-
+        
         private readonly HttpClient _client;
+
+        private static readonly IOpenFigiLimits _limitsWithKey;
+        private static readonly IOpenFigiLimits _limitsWithoutKey;
+
+        private readonly IOpenFigiLimits _limits;
+
+        static OpenFigiClient()
+        {
+            _limitsWithKey = new OpenFigiLimitWithApiKey();
+            _limitsWithoutKey = new OpenFigiLimitWithOutApiKey();
+        }
+
+        public OpenFigiClient()
+        {
+            _limits = _limitsWithoutKey;
+        }
 
         public OpenFigiClient(string apiKey)
         {
             CheckIsNotNullOrWhitespace(nameof(apiKey), apiKey);
+            _limits = _limitsWithKey;
             _client = HttpInternal.Client;
             _client.DefaultRequestHeaders.Add(OPENFIGI_API_KEY_HEADER_NAME, apiKey);
         }
@@ -26,6 +44,7 @@ namespace M5Finance
         {
             CheckIsNotNull(nameof(client), client);
             CheckIsNotNullOrWhitespace(nameof(apiKey), apiKey);
+            _limits = _limitsWithKey;
             _client = client;
             _client.DefaultRequestHeaders.Add(OPENFIGI_API_KEY_HEADER_NAME, apiKey);
         }
@@ -39,22 +58,22 @@ namespace M5Finance
         {
             CheckIsNotNull(nameof(openFigiRequestList), openFigiRequestList);
             CheckIsNotLessThanOrEqualTo(nameof(openFigiRequestList), openFigiRequestList.Count(), 0);
-            CheckIsWellFormedUri(nameof(OPENFIGI_SECURITIES_URL), OPENFIGI_SECURITIES_URL, UriKind.Absolute);
+            _limits.CheckJobLimit(nameof(openFigiRequestList), openFigiRequestList);
 
-            var response = await _client.SendAsStringAsync(OPENFIGI_SECURITIES_URL, JsonConvert.SerializeObject(openFigiRequestList, Formatting.Indented, new JsonSerializerSettings
+            IEnumerable<OpenFigiArrayResponse> response;
+
+            using (_limits.ApiLimiter.GetOperationScope())
             {
-                NullValueHandling = NullValueHandling.Ignore
-            }));
-
-            var resultList = JsonConvert.DeserializeObject<List<OpenFIGIArrayResponse>>(response);
-
-            var openFigiInstrumentsResponse = new List<OpenFigiInstrument>();
-            foreach (var result in resultList.Where(r => r.Data != null))
-            {
-                openFigiInstrumentsResponse.AddRange(result.Data);
+                response = await _client.SendAsync<IEnumerable<OpenFigiRequest>, IEnumerable<OpenFigiArrayResponse>>(OPENFIGI_SECURITIES_URL, openFigiRequestList);
             }
 
-            return openFigiInstrumentsResponse;
+            var result = new List<OpenFigiInstrument>();
+            foreach (var instruments in response.Where(r => r.Data != null))
+            {
+                result.AddRange(instruments.Data);
+            }
+
+            return result;
         }
     }
 }

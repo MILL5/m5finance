@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\m5finance\m5finance.csproj" />
+    <ProjectReference Include="..\m5finance\M5Finance.csproj" />
   </ItemGroup>
 
 </Project>

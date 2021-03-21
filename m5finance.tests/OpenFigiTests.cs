@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using static M5Finance.Tests.TestManager;
 
 namespace M5Finance.Tests
 {
@@ -13,7 +14,7 @@ namespace M5Finance.Tests
 
         public OpenFigiTests()
         {
-            _client = new OpenFigiClient(Environment.GetEnvironmentVariable("OpenFigiApiKey"));
+            _client = GetService<IOpenFigiClient>();
         }
 
         [TestMethod]
