@@ -11,7 +11,7 @@ namespace M5Finance.Tests
     public class OpenFigiTests
     {
         private readonly IOpenFigiClient _client;
-
+       
         public OpenFigiTests()
         {
             _client = GetService<IOpenFigiClient>();
@@ -21,10 +21,10 @@ namespace M5Finance.Tests
         public async Task GetOpenFigiSecuritiesTestAsync()
         {
             var requestList = new List<OpenFigiRequest>()
-                {
-                   new OpenFigiRequest("ID_BB_GLOBAL", "BBG004P64PB8"),
-                   new OpenFigiRequest("ID_BB_GLOBAL", "BBG000DD3805"),
-                };
+            {
+                new OpenFigiRequest{ IdType = "ID_BB_GLOBAL", IdValue = "BBG004P64PB8" },
+                new OpenFigiRequest{ IdType = "ID_BB_GLOBAL", IdValue = "BBG000DD3805" },
+            };
 
             var figiInstrumentList = await _client.GetFigiMappingsAsync(requestList);
 

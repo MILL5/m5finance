@@ -82,9 +82,16 @@ namespace M5Finance
                         .SendAsync(request, HttpCompletionOption.ResponseHeadersRead)
                         .ConfigureAwait(false))
                     {
-                        response.EnsureSuccessStatusCode();
-                        var responseAsString = await response.Content.ReadAsStringAsync();
-                        return Deserialize<V>(responseAsString);
+                        if (!response.IsSuccessStatusCode)
+                        {
+                            throw new Exception(response.ReasonPhrase);
+                        }
+                        else
+                        {
+                            response.EnsureSuccessStatusCode();
+                            var responseAsString = await response.Content.ReadAsStringAsync();
+                            return Deserialize<V>(responseAsString);
+                        }
                     }
                 }
             }
