@@ -10,6 +10,10 @@ namespace M5Finance
         void CheckJobLimit<T>(string name, IEnumerable<T> items);
 
         IResourceGoverner ApiLimiter { get; }
+
+        int ApiLimitPerMinute { get; }
+
+        int JobLimit { get; }
     }
 
     internal class OpenFigiLimitWithApiKey : IOpenFigiLimits
@@ -18,6 +22,10 @@ namespace M5Finance
         public const int JOB_LIMIT = 100;
 
         public IResourceGoverner ApiLimiter => new ResourceGoverner(API_LIMIT_PER_MINUTE);
+
+        public int ApiLimitPerMinute => API_LIMIT_PER_MINUTE;
+
+        public int JobLimit => JOB_LIMIT;
 
         public void CheckJobLimit<T>(string name, IEnumerable<T> items)
         {
@@ -32,6 +40,10 @@ namespace M5Finance
         public const int JOB_LIMIT = 10;
 
         public IResourceGoverner ApiLimiter => new ResourceGoverner(API_LIMIT_PER_MINUTE);
+
+        public int ApiLimitPerMinute => API_LIMIT_PER_MINUTE;
+
+        public int JobLimit => JOB_LIMIT;
 
         public void CheckJobLimit<T>(string name, IEnumerable<T> items)
         {
