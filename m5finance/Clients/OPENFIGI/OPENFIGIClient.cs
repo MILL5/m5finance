@@ -21,6 +21,8 @@ namespace M5Finance
 
         private readonly IOpenFigiLimits _limits;
 
+        public IOpenFigiLimits CurrentLimits => _limits;
+
         static OpenFigiClient()
         {
             _limitsWithKey = new OpenFigiLimitWithApiKey();
