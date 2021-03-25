@@ -19,6 +19,8 @@ namespace M5Finance
 
         static HttpInternal()
         {
+            ServicePointManager.DefaultConnectionLimit = Math.Max(ServicePointManager.DefaultConnectionLimit, 200);
+
             var h = new HttpClientHandler();
 
             if (h.SupportsAutomaticDecompression)
