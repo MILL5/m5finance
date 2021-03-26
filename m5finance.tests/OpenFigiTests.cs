@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shouldly;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,6 +28,28 @@ namespace M5Finance.Tests
             };
 
             var figiInstrumentList = await _client.GetFigiMappingsAsync(requestList);
+
+            Assert.IsNotNull(figiInstrumentList);
+            Assert.IsTrue(figiInstrumentList.Count() == 2);
+        }
+
+        [TestMethod]
+        public async Task GetMultipleOpenFigiSecuritiesTestAsync()
+        {
+            var requestList = new List<OpenFigiRequest>()
+            {
+                new OpenFigiRequest{ IdType = "ID_BB_GLOBAL", IdValue = "BBG004P64PB8" },
+                new OpenFigiRequest{ IdType = "ID_BB_GLOBAL", IdValue = "BBG000DD3805" },
+            };
+
+            IEnumerable<OpenFigiInstrument> figiInstrumentList = null;
+
+            for (int i = 0; i < 10; i++)
+            {
+                figiInstrumentList = await _client.GetFigiMappingsAsync(requestList);
+
+                _client.CurrentLimits.ApiLimiter.TotalCount.ShouldBeGreaterThan(0);
+            }
 
             Assert.IsNotNull(figiInstrumentList);
             Assert.IsTrue(figiInstrumentList.Count() == 2);

@@ -21,7 +21,12 @@ namespace M5Finance
         public const int API_LIMIT_PER_MINUTE = 250;
         public const int JOB_LIMIT = 100;
 
-        public IResourceGoverner ApiLimiter => new ResourceGoverner(API_LIMIT_PER_MINUTE);
+        public OpenFigiLimitWithApiKey()
+        {
+            ApiLimiter = new ResourceGoverner(API_LIMIT_PER_MINUTE);
+        }
+
+        public IResourceGoverner ApiLimiter { get; }
 
         public int ApiLimitPerMinute => API_LIMIT_PER_MINUTE;
 
@@ -39,7 +44,12 @@ namespace M5Finance
         public const int API_LIMIT_PER_MINUTE = 25;
         public const int JOB_LIMIT = 10;
 
-        public IResourceGoverner ApiLimiter => new ResourceGoverner(API_LIMIT_PER_MINUTE);
+        public OpenFigiLimitWithOutApiKey()
+        {
+            ApiLimiter = new ResourceGoverner(API_LIMIT_PER_MINUTE);
+        }
+
+        public IResourceGoverner ApiLimiter { get; }
 
         public int ApiLimitPerMinute => API_LIMIT_PER_MINUTE;
 
