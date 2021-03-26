@@ -61,7 +61,7 @@ namespace M5Finance
 
             IEnumerable<OpenFigiArrayResponse> response;
 
-            using (_limits.ApiLimiter.GetOperationScope())
+            using (await _limits.ApiLimiter.GetOperationScopeAsync())
             {
                 response = await _client.SendAsync<IEnumerable<OpenFigiRequest>, IEnumerable<OpenFigiArrayResponse>>(OPENFIGI_SECURITIES_URL, openFigiRequestList);
             }
