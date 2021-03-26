@@ -18,7 +18,7 @@ namespace M5Finance
 
     internal class OpenFigiLimitWithApiKey : IOpenFigiLimits
     {
-        public const int API_LIMIT_PER_MINUTE = 200;
+        public const int API_LIMIT_PER_MINUTE = 210;
         public const int JOB_LIMIT = 100;
 
         public OpenFigiLimitWithApiKey()
@@ -41,7 +41,7 @@ namespace M5Finance
 
     internal class OpenFigiLimitWithOutApiKey : IOpenFigiLimits
     {
-        public const int API_LIMIT_PER_MINUTE = 20;
+        public const int API_LIMIT_PER_MINUTE = 21;
         public const int JOB_LIMIT = 10;
 
         public OpenFigiLimitWithOutApiKey()
