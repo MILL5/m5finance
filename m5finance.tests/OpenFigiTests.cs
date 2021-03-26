@@ -49,7 +49,10 @@ namespace M5Finance.Tests
                 figiInstrumentList = await _client.GetFigiMappingsAsync(requestList);
 
                 _client.CurrentLimits.ApiLimiter.TotalCount.ShouldBeGreaterThan(0);
+                _client.CurrentLimits.ApiLimiter.CallsPerMinute.ShouldBeGreaterThan(0);
             }
+
+            _ = _client.CurrentLimits.ApiLimiter.CallsPerMinute;
 
             Assert.IsNotNull(figiInstrumentList);
             Assert.IsTrue(figiInstrumentList.Count() == 2);

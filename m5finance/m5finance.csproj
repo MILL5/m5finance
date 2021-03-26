@@ -19,11 +19,11 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<Version>1.0.14-alpha</Version>
+	<Version>1.0.15-alpha</Version>
 	<IncludeSymbols>true</IncludeSymbols>
 	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	<AssemblyVersion>1.0.14.0</AssemblyVersion>
-	<FileVersion>1.0.14.0</FileVersion>
+	<AssemblyVersion>1.0.15.0</AssemblyVersion>
+	<FileVersion>1.0.15.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +32,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Threading" Version="16.9.60" />
     <PackageReference Include="morelinq" Version="3.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Pineapple" Version="1.0.28-alpha" />
+    <PackageReference Include="Pineapple" Version="1.0.29-alpha" />
   </ItemGroup>
 
   <ItemGroup>
