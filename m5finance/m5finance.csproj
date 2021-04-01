@@ -32,7 +32,7 @@
     <PackageReference Include="Microsoft.VisualStudio.Threading" Version="16.9.60" />
     <PackageReference Include="morelinq" Version="3.3.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Pineapple" Version="1.0.29-alpha" />
+    <PackageReference Include="Pineapple" Version="1.0.30" />
   </ItemGroup>
 
   <ItemGroup>

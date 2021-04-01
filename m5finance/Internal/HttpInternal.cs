@@ -34,6 +34,7 @@ namespace M5Finance
 
             hc.DefaultRequestHeaders.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
             hc.DefaultRequestHeaders.Add("Accept-Language", "en-US,en;q=0.9");
+            hc.DefaultRequestHeaders.Add("Accept-Encoding", "gzip,deflate,br");
             hc.DefaultRequestHeaders.Add("User-Agent", USER_AGENT);
             hc.DefaultRequestHeaders.Add("Cache-Control", "no-cache");
             Client = hc;
