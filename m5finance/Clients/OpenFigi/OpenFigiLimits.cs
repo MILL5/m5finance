@@ -61,4 +61,26 @@ namespace M5Finance
             CheckIsNotGreaterThan(nameof(items), items.Count(), JOB_LIMIT);
         }
     }
+    internal class OpenFigiFilterLimitWithApiKey : IOpenFigiLimits
+    {
+        public const int API_LIMIT_PER_MINUTE = 20;
+        public const int JOB_LIMIT = 100;
+
+        public OpenFigiFilterLimitWithApiKey()
+        {
+            ApiLimiter = new ResourceGoverner(API_LIMIT_PER_MINUTE);
+        }
+
+        public IResourceGoverner ApiLimiter { get; }
+
+        public int ApiLimitPerMinute => API_LIMIT_PER_MINUTE;
+
+        public int JobLimit => JOB_LIMIT;
+
+        public void CheckJobLimit<T>(string name, IEnumerable<T> items)
+        {
+            CheckIsNotNullOrWhitespace(nameof(name), name);
+            CheckIsNotGreaterThan(nameof(items), items.Count(), JOB_LIMIT);
+        }
+    }
 }

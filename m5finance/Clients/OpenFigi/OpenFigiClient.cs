@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,11 +12,14 @@ namespace M5Finance
     {
         private const string OPENFIGI_SECURITIES_URL = "https://api.openfigi.com/v1/mapping";
         private const string OPENFIGI_API_KEY_HEADER_NAME = "X-OPENFIGI-APIKEY";
-        
+
+        private const string OPENFIGI_V3_FILTER_URL = "https://api.openfigi.com/v3/filter";
+
         private readonly HttpClient _client;
 
         private static readonly IOpenFigiLimits _limitsWithKey;
         private static readonly IOpenFigiLimits _limitsWithoutKey;
+        private static readonly IOpenFigiLimits _filterLimitsWithKey;
 
         private readonly IOpenFigiLimits _limits;
 
@@ -24,6 +29,8 @@ namespace M5Finance
         {
             _limitsWithKey = new OpenFigiLimitWithApiKey();
             _limitsWithoutKey = new OpenFigiLimitWithOutApiKey();
+
+            _filterLimitsWithKey = new OpenFigiFilterLimitWithApiKey();
         }
 
         public OpenFigiClient()
@@ -73,6 +80,36 @@ namespace M5Finance
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Gets the OpenFigi data filtered by exchange code
+        /// </summary>
+        /// <param exchangeCode="exchangeCode">The exchange code</param>
+        /// <returns>The OpenFigi response</returns>
+        public async Task<OpenFigiResponseV3> GetFigiMappingsForExchangeAsync(string exchangeCode, string next = null)
+        {
+            CheckIsNotNullOrWhitespace(nameof(exchangeCode), exchangeCode);
+
+            var result = new List<OpenFigiInstrumentV3>();
+
+            var request = new OpenFigiRequestV3() 
+            { 
+                ExchCode = exchangeCode,
+                MarketSectorDesc = "Equity",
+                SecurityType = "Common Stock",
+                Start = next
+            };
+
+            OpenFigiResponseV3 response;
+            using (await _filterLimitsWithKey.ApiLimiter.GetOperationScopeAsync())
+            {
+                response = await _client.SendAsync<OpenFigiRequestV3, OpenFigiResponseV3>(OPENFIGI_V3_FILTER_URL, request);
+                result.AddRange(response.Data);
+                request.Start = response.Next;
+            }
+
+            return response;
         }
     }
 }
