@@ -90,4 +90,64 @@ namespace M5Finance
         [JsonProperty("error")]
         public string Error { get; set; }
     }
+
+    public class OpenFigiRequestV3
+    {
+        [JsonProperty("exchCode")]
+        public string ExchCode { get; set; }
+
+        [JsonProperty("marketSecDes")]
+        public string MarketSectorDesc { get; set; }
+
+        [JsonProperty("securityType")]
+        public string SecurityType { get; set; }
+
+        [JsonProperty("start", NullValueHandling = NullValueHandling.Ignore)]
+        public string Start { get; set; }
+    }
+
+    public class OpenFigiResponseV3
+    {
+        [JsonProperty("data")]
+        public List<OpenFigiInstrumentV3> Data { get; set; }
+
+        [JsonProperty("next")]
+        public string Next { get; set; }
+
+        [JsonProperty("total")]
+        public string Total { get; set; }
+    }
+
+    public class OpenFigiInstrumentV3
+    {
+        [JsonProperty("figi")]
+        public string Figi { get; set; }
+
+        [JsonProperty("securityType")]
+        public string SecurityType { get; set; }
+
+        [JsonProperty("marketSector")]
+        public string MarketSector { get; set; }
+
+        [JsonProperty("ticker")]
+        public string Ticker { get; set; }
+
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("exchCode")]
+        public string ExchCode { get; set; }
+
+        [JsonProperty("shareClassFIGI")]
+        public string ShareClassFIGI { get; set; }
+
+        [JsonProperty("compositeFIGI")]
+        public string CompositeFIGI { get; set; }
+
+        [JsonProperty("securityType2")]
+        public string SecurityType2 { get; set; }
+
+        [JsonProperty("securityDescription")]
+        public string SecurityDescription { get; set; }
+    }
 }

@@ -11,6 +11,8 @@ namespace M5Finance.Tests
     [TestClass]
     public class OpenFigiTests
     {
+        private const string EXCHANGE_CODE_US = "US";
+
         private readonly IOpenFigiClient _client;
        
         public OpenFigiTests()
@@ -67,7 +69,6 @@ namespace M5Finance.Tests
             });
         }
 
-
         [TestMethod]
         public async Task GetOpenFigiSecuritiesTestAsyncThrowRangeErrorAsync()
         {
@@ -76,6 +77,50 @@ namespace M5Finance.Tests
             await Assert.ThrowsExceptionAsync<ArgumentOutOfRangeException>(async () =>
             {
                 await _client.GetFigiMappingsAsync(requestList);
+            });
+        }
+
+        [TestMethod]
+        public async Task GetFigiMappingsForExchangeSucceedsAsync()
+        {
+            var result = await _client.GetFigiMappingsForExchangeAsync(EXCHANGE_CODE_US);
+
+            Assert.IsInstanceOfType(result, typeof(OpenFigiResponseV3));
+            Assert.IsInstanceOfType(result.Data.First(), typeof(OpenFigiInstrumentV3));
+            Assert.AreEqual(100, result.Data.Count);
+        }
+
+        [TestMethod]
+        public async Task GetFigiMappingsForExchangePaginationSucceedsAsync()
+        {
+            var result1 = await _client.GetFigiMappingsForExchangeAsync(EXCHANGE_CODE_US);
+
+            Assert.IsInstanceOfType(result1, typeof(OpenFigiResponseV3));
+            Assert.IsInstanceOfType(result1.Data.First(), typeof(OpenFigiInstrumentV3));
+            Assert.AreEqual(100, result1.Data.Count);
+
+            var result2 = await _client.GetFigiMappingsForExchangeAsync(EXCHANGE_CODE_US, result1.Next);
+
+            Assert.IsInstanceOfType(result2, typeof(OpenFigiResponseV3));
+            Assert.IsInstanceOfType(result2.Data.First(), typeof(OpenFigiInstrumentV3));
+            Assert.AreEqual(100, result2.Data.Count);
+        }
+
+        [TestMethod]
+        public async Task GetFigiMappingsForBadExchangeAsync()
+        {
+            var result = await _client.GetFigiMappingsForExchangeAsync("foo");
+
+            Assert.IsInstanceOfType(result, typeof(OpenFigiResponseV3));
+            Assert.IsFalse(result.Data.Any());
+        }
+
+        [TestMethod]
+        public async Task GetFigiMappingsForExchangeNoExchangeAsync()
+        {
+            await Assert.ThrowsExceptionAsync<ArgumentException>(async () =>
+            {
+                await _client.GetFigiMappingsForExchangeAsync(string.Empty);
             });
         }
     }
