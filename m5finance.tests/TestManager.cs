@@ -8,8 +8,8 @@ using System.IO;
 
 namespace M5Finance.Tests
 {
-    [ExcludeFromCodeCoverage]
     [TestClass]
+    [ExcludeFromCodeCoverage] 
     public class TestManager
     {
         public static ILogger Logger { get; private set; }

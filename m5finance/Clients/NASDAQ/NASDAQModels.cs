@@ -85,7 +85,7 @@ namespace M5Finance
         public object DeveloperMessage { get; set; }
     }
 
-    public enum Country { Argentina, Australia, Bahamas, Belgium, Bermuda, Brazil, Canada, CaymanIslands, Chile, China, Colombia, CostaRica, Country, Curacao, Cyprus, Denmark, Empty, Finland, France, Germany, Greece, Guernsey, HongKong, India, Indonesia, Ireland, IsleOfMan, Israel, Italy, Japan, Jersey, Jordan, Kazakhstan, Luxembourg, Macau, Malta, Mexico, Monaco, Netherlands, NewZealand, Norway, Panama, Peru, Philippines, Portugal, PuertoRico, Russia, Singapore, SouthAfrica, SouthKorea, Spain, Sweden, Switzerland, Taiwan, Turkey, UnitedArabEmirates, UnitedKingdom, UnitedStates };
+    public enum Country { Argentina, Australia, Bahamas, Belgium, Bermuda, Brazil, Canada, CaymanIslands, Chile, China, Colombia, CostaRica, Country, Curacao, Cyprus, Denmark, Empty, Finland, France, Germany, Greece, Guernsey, HongKong, India, Indonesia, Ireland, IsleOfMan, Israel, Italy, Japan, Jersey, Jordan, Kazakhstan, Luxembourg, Macau, Malaysia, Malta, Mexico, Monaco, Netherlands, NewZealand, Norway, Panama, Peru, Philippines, Portugal, PuertoRico, Russia, Singapore, SouthAfrica, SouthKorea, Spain, Sweden, Switzerland, Taiwan, Turkey, UnitedArabEmirates, UnitedKingdom, UnitedStates, Uruguay };
 
     public enum IPOYearEnum { Empty, IpoYear };
 
@@ -207,6 +207,8 @@ namespace M5Finance
                     return Country.Luxembourg;
                 case "Macau":
                     return Country.Macau;
+                case "Malaysia":
+                    return Country.Malaysia;
                 case "Malta":
                     return Country.Malta;
                 case "Mexico":
@@ -253,6 +255,8 @@ namespace M5Finance
                     return Country.UnitedKingdom;
                 case "United States":
                     return Country.UnitedStates;
+                case "Uruguay":
+                    return Country.Uruguay;
             }
             throw new Exception("Cannot unmarshal type Country");
         }

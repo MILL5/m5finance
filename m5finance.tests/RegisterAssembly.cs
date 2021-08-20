@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Diagnostics.CodeAnalysis;
 using static Pineapple.Common.Preconditions;
 
 namespace M5Finance.Tests
 {
+    [ExcludeFromCodeCoverage]
     public static class RegisterAssembly
     {
         public static void AddApplication(this IServiceCollection services,
