@@ -1,5 +1,4 @@
-﻿using M5Finance.Clients.OPENFIGI;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace M5Finance

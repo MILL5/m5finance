@@ -1,52 +1,52 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>M5Finance</RootNamespace>
-    <AssemblyName>M5Finance</AssemblyName>
-    <Authors>MILL5</Authors>
-    <Company>MILL5</Company>
-    <Product>M5Finance</Product>
-	<Title>M5Finance</Title>
-    <Copyright>Copyright 2019-2021</Copyright>
-    <PackageProjectUrl>https://github.com/MILL5/m5finance</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/MILL5/m5finance</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageTags>yahoo;finance;mill5,nyse;nasdaq;figi;bloomberg</PackageTags>
-    <Description>M5Finance is an aggregation of as many free and public sources of financial data. This includes NASDAQ, NYSE, and NYSE American stock exchanges.</Description>
-    <PackageIcon>m5finance.png</PackageIcon>
-    <PackageIconUrl />
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-	<Version>1.0.20-alpha</Version>
-	<IncludeSymbols>true</IncludeSymbols>
-	<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-	<AssemblyVersion>1.0.20.0</AssemblyVersion>
-	<FileVersion>1.0.20.0</FileVersion>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<RootNamespace>M5Finance</RootNamespace>
+		<AssemblyName>M5Finance</AssemblyName>
+		<Authors>MILL5</Authors>
+		<Company>MILL5</Company>
+		<Product>M5Finance</Product>
+		<Title>M5Finance</Title>
+		<Copyright>Copyright 2019-2021</Copyright>
+		<PackageProjectUrl>https://github.com/MILL5/m5finance</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/MILL5/m5finance</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>yahoo;finance;mill5,nyse;nasdaq;figi;bloomberg</PackageTags>
+		<Description>M5Finance is an aggregation of as many free and public sources of financial data. This includes NASDAQ, NYSE, and NYSE American stock exchanges.</Description>
+		<PackageIcon>m5finance.png</PackageIcon>
+		<PackageIconUrl />
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<Version>1.0.20-alpha</Version>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<AssemblyVersion>1.0.20.0</AssemblyVersion>
+		<FileVersion>1.0.20.0</FileVersion>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="CsvHelper" Version="27.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Threading" Version="16.10.56" />
-    <PackageReference Include="morelinq" Version="3.3.2" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="Pineapple" Version="1.0.34" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CsvHelper" Version="27.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="5.0.0" />
+		<PackageReference Include="Microsoft.VisualStudio.Threading" Version="16.10.56" />
+		<PackageReference Include="morelinq" Version="3.3.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+		<PackageReference Include="Pineapple" Version="1.0.34" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Include="..\LICENSE">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-    <None Include="m5finance.png">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
-  </ItemGroup>
+	<ItemGroup>
+		<None Include="..\LICENSE">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+		<None Include="m5finance.png">
+			<Pack>True</Pack>
+			<PackagePath></PackagePath>
+		</None>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Providers\Yahoo\Exchange\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Providers\Yahoo\Exchange\" />
+	</ItemGroup>
 </Project>

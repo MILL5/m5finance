@@ -1,4 +1,4 @@
-﻿using M5Finance.Clients.OPENFIGI;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -9,24 +9,17 @@ namespace M5Finance
 {
     public class OpenFigiClient : IOpenFigiClient
     {
-        private const string OPENFIGI_SECURITIES_URL = "https://api.openfigi.com/v1/mapping";
+        private static readonly Uri OpenFigiMappingV1Url = new Uri("https://api.openfigi.com/v1/mapping");
+        private static readonly Uri OpenFigiFilterV3Url = new Uri("https://api.openfigi.com/v3/filter");
+        private static readonly IOpenFigiLimits _limitsWithKey = new OpenFigiLimitWithApiKey();
+        private static readonly IOpenFigiLimits _filterLimitsWithKey = new OpenFigiFilterLimitWithApiKey();
+
         private const string OPENFIGI_API_KEY_HEADER_NAME = "X-OPENFIGI-APIKEY";
-        private const string OPENFIGI_V3_FILTER_URL = "https://api.openfigi.com/v3/filter";
 
         private readonly HttpClient _client;
-
-        private static readonly IOpenFigiLimits _limitsWithKey;
-        private static readonly IOpenFigiLimits _filterLimitsWithKey;
-
         private readonly IOpenFigiLimits _limits;
 
         public IOpenFigiLimits CurrentLimits => _limits;
-
-        static OpenFigiClient()
-        {
-            _limitsWithKey = new OpenFigiLimitWithApiKey();
-            _filterLimitsWithKey = new OpenFigiFilterLimitWithApiKey();
-        }
 
         public OpenFigiClient(string apiKey)
         {
@@ -51,7 +44,7 @@ namespace M5Finance
 
             using (await _limits.ApiLimiter.GetOperationScopeAsync())
             {
-                response = await _client.SendAsync<IEnumerable<OpenFigiRequest>, IEnumerable<OpenFigiArrayResponse>>(OPENFIGI_SECURITIES_URL, openFigiRequestList);
+                response = await _client.SendAsync<IEnumerable<OpenFigiRequest>, IEnumerable<OpenFigiArrayResponse>>(OpenFigiMappingV1Url.ToString(), openFigiRequestList);
             }
 
             var result = new List<OpenFigiInstrument>();
@@ -91,7 +84,7 @@ namespace M5Finance
             OpenFigiResponseV3 response;
             using (await _filterLimitsWithKey.ApiLimiter.GetOperationScopeAsync())
             {
-                response = await _client.SendAsync<OpenFigiRequestV3, OpenFigiResponseV3>(OPENFIGI_V3_FILTER_URL, request);
+                response = await _client.SendAsync<OpenFigiRequestV3, OpenFigiResponseV3>(OpenFigiFilterV3Url.ToString(), request);
                 result.AddRange(response.Data);
                 request.Start = response.Next;
             }

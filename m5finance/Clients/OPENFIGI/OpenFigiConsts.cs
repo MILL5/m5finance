@@ -1,6 +1,6 @@
-﻿namespace M5Finance.Clients.OPENFIGI
+﻿namespace M5Finance
 {
-    public class OpenFigiConsts
+    public static class OpenFigiConsts
     {
         public static class OpenFigiSecurityTypes
         {
