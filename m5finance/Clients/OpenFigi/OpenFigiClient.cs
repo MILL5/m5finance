@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -10,48 +9,23 @@ namespace M5Finance
 {
     public class OpenFigiClient : IOpenFigiClient
     {
-        private const string OPENFIGI_SECURITIES_URL = "https://api.openfigi.com/v1/mapping";
+        private static readonly Uri OpenFigiMappingV1Url = new Uri("https://api.openfigi.com/v1/mapping");
+        private static readonly Uri OpenFigiFilterV3Url = new Uri("https://api.openfigi.com/v3/filter");
+        private static readonly IOpenFigiLimits _limitsWithKey = new OpenFigiLimitWithApiKey();
+        private static readonly IOpenFigiLimits _filterLimitsWithKey = new OpenFigiFilterLimitWithApiKey();
+
         private const string OPENFIGI_API_KEY_HEADER_NAME = "X-OPENFIGI-APIKEY";
 
-        private const string OPENFIGI_V3_FILTER_URL = "https://api.openfigi.com/v3/filter";
-
         private readonly HttpClient _client;
-
-        private static readonly IOpenFigiLimits _limitsWithKey;
-        private static readonly IOpenFigiLimits _limitsWithoutKey;
-        private static readonly IOpenFigiLimits _filterLimitsWithKey;
-
         private readonly IOpenFigiLimits _limits;
 
         public IOpenFigiLimits CurrentLimits => _limits;
-
-        static OpenFigiClient()
-        {
-            _limitsWithKey = new OpenFigiLimitWithApiKey();
-            _limitsWithoutKey = new OpenFigiLimitWithOutApiKey();
-
-            _filterLimitsWithKey = new OpenFigiFilterLimitWithApiKey();
-        }
-
-        public OpenFigiClient()
-        {
-            _limits = _limitsWithoutKey;
-        }
 
         public OpenFigiClient(string apiKey)
         {
             CheckIsNotNullOrWhitespace(nameof(apiKey), apiKey);
             _limits = _limitsWithKey;
             _client = HttpInternal.Client;
-            _client.DefaultRequestHeaders.Add(OPENFIGI_API_KEY_HEADER_NAME, apiKey);
-        }
-
-        public OpenFigiClient(HttpClient client, string apiKey)
-        {
-            CheckIsNotNull(nameof(client), client);
-            CheckIsNotNullOrWhitespace(nameof(apiKey), apiKey);
-            _limits = _limitsWithKey;
-            _client = client;
             _client.DefaultRequestHeaders.Add(OPENFIGI_API_KEY_HEADER_NAME, apiKey);
         }
 
@@ -70,7 +44,7 @@ namespace M5Finance
 
             using (await _limits.ApiLimiter.GetOperationScopeAsync())
             {
-                response = await _client.SendAsync<IEnumerable<OpenFigiRequest>, IEnumerable<OpenFigiArrayResponse>>(OPENFIGI_SECURITIES_URL, openFigiRequestList);
+                response = await _client.SendAsync<IEnumerable<OpenFigiRequest>, IEnumerable<OpenFigiArrayResponse>>(OpenFigiMappingV1Url.ToString(), openFigiRequestList);
             }
 
             var result = new List<OpenFigiInstrument>();
@@ -87,24 +61,30 @@ namespace M5Finance
         /// </summary>
         /// <param exchangeCode="exchangeCode">The exchange code</param>
         /// <returns>The OpenFigi response</returns>
-        public async Task<OpenFigiResponseV3> GetFigiMappingsForExchangeAsync(string exchangeCode, string next = null)
+        public async Task<OpenFigiResponseV3> GetFigiMappingsForExchangeAsync(
+            string exchangeCode,
+            string marketSector = OpenFigiConsts.OpenFigiMarketSector.Equity,
+            string securityType = OpenFigiConsts.OpenFigiSecurityTypes.CommonStock,
+            string next = null)
         {
             CheckIsNotNullOrWhitespace(nameof(exchangeCode), exchangeCode);
+            CheckIsNotNullOrWhitespace(nameof(marketSector), marketSector);
+            CheckIsNotNullOrWhitespace(nameof(securityType), securityType);
 
             var result = new List<OpenFigiInstrumentV3>();
 
-            var request = new OpenFigiRequestV3() 
-            { 
+            var request = new OpenFigiRequestV3()
+            {
                 ExchCode = exchangeCode,
-                MarketSectorDesc = "Equity",
-                SecurityType = "Common Stock",
+                MarketSectorDesc = marketSector,
+                SecurityType = securityType,
                 Start = next
             };
 
             OpenFigiResponseV3 response;
             using (await _filterLimitsWithKey.ApiLimiter.GetOperationScopeAsync())
             {
-                response = await _client.SendAsync<OpenFigiRequestV3, OpenFigiResponseV3>(OPENFIGI_V3_FILTER_URL, request);
+                response = await _client.SendAsync<OpenFigiRequestV3, OpenFigiResponseV3>(OpenFigiFilterV3Url.ToString(), request);
                 result.AddRange(response.Data);
                 request.Start = response.Next;
             }

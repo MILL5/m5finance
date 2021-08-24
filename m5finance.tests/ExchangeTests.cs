@@ -1,10 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace M5Finance.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class ExchangeTests
     {
         private readonly IExchangeService _service;

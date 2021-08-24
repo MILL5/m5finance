@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Shouldly;
+using System.Diagnostics.CodeAnalysis;
 
 namespace M5Finance.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class CikLookupTests
     {
         private readonly CIKMappingClient _client;
@@ -36,7 +38,7 @@ namespace M5Finance.Tests
         [TestMethod]
         public async Task GetCikMappingFromCikTestAsync()
         {
-            const int CIK = 3124;
+            const int CIK = 5513;
 
             var lookup = await _client.GetCikMappingsAsync();
 

@@ -7,6 +7,10 @@ namespace M5Finance
     {
         IOpenFigiLimits CurrentLimits { get; }
         Task<IEnumerable<OpenFigiInstrument>> GetFigiMappingsAsync(IEnumerable<OpenFigiRequest> openFigiRequestList);
-        Task<OpenFigiResponseV3> GetFigiMappingsForExchangeAsync(string exchangeCode, string next = null);
+        Task<OpenFigiResponseV3> GetFigiMappingsForExchangeAsync(
+            string exchangeCode,
+            string marketSector = OpenFigiConsts.OpenFigiMarketSector.Equity,
+            string securityType = OpenFigiConsts.OpenFigiSecurityTypes.CommonStock,
+            string next = null);
     }
 }

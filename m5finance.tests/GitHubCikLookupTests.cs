@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Shouldly;
+using System.Diagnostics.CodeAnalysis;
 
 namespace M5Finance.Tests
 {
     [TestClass]
+    [ExcludeFromCodeCoverage]
     public class GitHubCikLookupTests
     {
         private readonly GitHubCIKMappingClient _client;
