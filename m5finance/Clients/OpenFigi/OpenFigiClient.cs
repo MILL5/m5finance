@@ -68,8 +68,6 @@ namespace M5Finance
             string next = null)
         {
             CheckIsNotNullOrWhitespace(nameof(exchangeCode), exchangeCode);
-            CheckIsNotNullOrWhitespace(nameof(marketSector), marketSector);
-            CheckIsNotNullOrWhitespace(nameof(securityType), securityType);
 
             var result = new List<OpenFigiInstrumentV3>();
 

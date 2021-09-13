@@ -93,6 +93,20 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        public async Task GetFigiMappingsForPreferredMarketSectorSucceedsAsync()
+        {
+            var result = await _client.GetFigiMappingsForExchangeAsync(
+                exchangeCode: "NASDAQ", 
+                marketSector: OpenFigiConsts.OpenFigiMarketSector.Preferred,
+                securityType: null);
+
+            Assert.IsInstanceOfType(result, typeof(OpenFigiResponseV3));
+            Assert.IsInstanceOfType(result.Data.First(), typeof(OpenFigiInstrumentV3));
+            Assert.AreEqual(OpenFigiConsts.OpenFigiMarketSector.Preferred, result.Data.First().MarketSector);
+            Assert.IsTrue(result.Data.Any());
+        }
+
+        [TestMethod]
         public async Task GetFigiMappingsForExchange_ExchangeCodeNull_Async()
         {
             await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
