@@ -11,6 +11,7 @@
         public static class OpenFigiMarketSector
         {
             public const string Equity = "Equity";
+            public const string Preferred = "Pfd";
         }
     }
 }
