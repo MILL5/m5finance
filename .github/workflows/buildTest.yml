@@ -17,6 +17,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       
+      - name: .NET 5.0 Setup
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
       - name: Restore Dependencies
         run: |
           dotnet restore m5finance.sln
