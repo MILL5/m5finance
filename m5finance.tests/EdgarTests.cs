@@ -17,6 +17,7 @@ namespace M5Finance.Tests
             _client = new EdgarClient();
         }
 
+        [Ignore]
         [TestMethod]
         public async Task GetEdgarFilingsTestAsync()
         {

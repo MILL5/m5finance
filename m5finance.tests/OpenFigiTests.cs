@@ -116,24 +116,6 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
-        public async Task GetFigiMappingsForExchange_MarketSectorNull_Async()
-        {
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
-            {
-                await _client.GetFigiMappingsForExchangeAsync(exchangeCode: EXCHANGE_CODE_US, marketSector: null);
-            });
-        }
-
-        [TestMethod]
-        public async Task GetFigiMappingsForExchange_SecurityTypeNull_Async()
-        {
-            await Assert.ThrowsExceptionAsync<ArgumentNullException>(async () =>
-            {
-                await _client.GetFigiMappingsForExchangeAsync(exchangeCode: EXCHANGE_CODE_US, securityType: null);
-            });
-        }
-
-        [TestMethod]
         public async Task GetFigiMappingsForExchangePaginationSucceedsAsync()
         {
             var result1 = await _client.GetFigiMappingsForExchangeAsync(exchangeCode: EXCHANGE_CODE_US);

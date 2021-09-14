@@ -1,0 +1,37 @@
+name: CI - Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+
+  tests:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      
+      - name: .NET 5.0 Setup
+        uses: actions/setup-dotnet@v1
+        with:
+          dotnet-version: 5.0.x
+
+      - name: Restore Dependencies
+        run: |
+          dotnet restore m5finance.sln
+
+      - name: Build
+        run: |
+          dotnet build m5finance.sln --no-restore /WarnAsError --configuration Release
+
+      - name: Test
+        env:
+          OpenFigiApiKey: ${{ secrets.OPENFIGI_API_KEY }}
+        run: |
+          dotnet test m5finance.tests/m5finance.tests.csproj --no-restore --verbosity normal
