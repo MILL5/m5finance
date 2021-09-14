@@ -189,10 +189,10 @@ namespace Edgar.Explorer
 
         public override void RaisePropertyChanged<T>(Expression<Func<T>> propertyExpression)
         {
-            Application.Current.Dispatcher.BeginInvoke(new Action (() =>
-            {
-                base.RaisePropertyChanged(propertyExpression);
-            }));
+            _ = Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+             {
+                 base.RaisePropertyChanged(propertyExpression);
+             }));
         }
 
     }
