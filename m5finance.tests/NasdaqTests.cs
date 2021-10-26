@@ -9,10 +9,6 @@ namespace M5Finance.Tests
     [ExcludeFromCodeCoverage]
     public class NasdaqTests
     {
-        private const string EX_MIC_XNYS = "XNYS";
-
-        private const string EX_ACRO_XNYS = "NYSE";
-
         private readonly NASDAQClient _client;
 
         public NasdaqTests()
@@ -29,18 +25,21 @@ namespace M5Finance.Tests
             Assert.IsTrue(securities.Any());
         }
 
-        [TestMethod]
-        public async Task GetSecuritiesByExchangeTestAsync()
+        [DataTestMethod]
+        [DataRow("XNAS", "NASDAQ")]
+        [DataRow("XNYS", "NYSE")]
+        [DataRow("XASE", "AMEX")]
+        public async Task GetSecuritiesByExchangeTestAsync(string exchangeMic, string exchangeAcronym)
         {
-            var securities = await _client.GetSecuritiesByExchangeAsync(EX_MIC_XNYS, EX_ACRO_XNYS);
+            var securities = await _client.GetSecuritiesByExchangeAsync(exchangeMic, exchangeAcronym);
 
             Assert.IsNotNull(securities);
             Assert.IsTrue(securities.Any());
 
             var security = securities.First();
 
-            Assert.AreEqual(EX_MIC_XNYS, security.ExchangeMic);
-            Assert.AreEqual(EX_ACRO_XNYS, security.ExchangeAcronym);
+            Assert.AreEqual(exchangeMic, security.ExchangeMic);
+            Assert.AreEqual(exchangeAcronym, security.ExchangeAcronym);
         }
     }
 }
