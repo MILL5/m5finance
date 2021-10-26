@@ -6,5 +6,7 @@ namespace M5Finance
     public interface ISecurityClient
     {
         Task<IEnumerable<Security>> GetSecuritiesAsync();
+
+        Task<IEnumerable<NasdaqSecuritiesExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym);
     }
 }

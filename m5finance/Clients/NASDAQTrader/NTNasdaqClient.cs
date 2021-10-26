@@ -1,5 +1,6 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -87,6 +88,11 @@ namespace M5Finance
             }
 
             return listOfSecurities;
+        }
+
+        public Task<IEnumerable<NasdaqSecuritiesExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym)
+        {
+            throw new NotImplementedException();
         }
     }
 }
