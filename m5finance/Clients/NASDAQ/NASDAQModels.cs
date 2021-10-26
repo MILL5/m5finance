@@ -25,9 +25,9 @@ namespace M5Finance
         public Status Status { get; set; }
     }
 
-    public class NasdaqSecuritiesExchange : Headers
+    public class NasdaqSecurityExchange : Headers
     {
-        public NasdaqSecuritiesExchange(Headers headers, string exchangeMic, string exchangeAcronym)
+        public NasdaqSecurityExchange(Headers headers, string exchangeMic, string exchangeAcronym)
         {
             Symbol = headers.Symbol;
             Name = headers.Name;

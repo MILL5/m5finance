@@ -19,11 +19,11 @@
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
 		<PackageLicenseFile>LICENSE</PackageLicenseFile>
-		<Version>1.0.24-alpha</Version>
+		<Version>1.0.25-alpha</Version>
 		<IncludeSymbols>true</IncludeSymbols>
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<AssemblyVersion>1.0.24.0</AssemblyVersion>
-		<FileVersion>1.0.24.0</FileVersion>
+		<AssemblyVersion>1.0.25.0</AssemblyVersion>
+		<FileVersion>1.0.25.0</FileVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
