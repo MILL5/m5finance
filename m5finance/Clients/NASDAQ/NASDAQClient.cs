@@ -15,6 +15,7 @@ namespace M5Finance
     {
         private const string NASDAQ_SECURITIES_URL = "https://api.nasdaq.com/api/screener/stocks?download=true";
         private const string NASDAQ_MICCODE = "YNAS";
+        private const string EXCHANGE_QUERY = "&exchange=";
 
         private readonly HttpClient _client;
 
@@ -45,6 +46,24 @@ namespace M5Finance
                 };
 
                 listOfSecurities.Add(s);
+            }
+
+            return listOfSecurities;
+        }
+
+        public async Task<IEnumerable<NasdaqSecuritiesExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym)
+        {
+            var exchangeUrl = string.Concat(NASDAQ_SECURITIES_URL, EXCHANGE_QUERY, exchangeAcronym);
+
+            var file = await _client.DownloadFileAsStringAsync(exchangeUrl);
+
+            var listOfSecurities = new List<NasdaqSecuritiesExchange>(10000);
+
+            foreach (var row in NasdaqSecurities.FromJson(file).Data.Rows)
+            {
+                var securityExchange = new NasdaqSecuritiesExchange(row, exchangeMic, exchangeAcronym);
+
+                listOfSecurities.Add(securityExchange);
             }
 
             return listOfSecurities;

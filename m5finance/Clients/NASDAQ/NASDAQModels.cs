@@ -25,6 +25,31 @@ namespace M5Finance
         public Status Status { get; set; }
     }
 
+    public class NasdaqSecuritiesExchange : Headers
+    {
+        public NasdaqSecuritiesExchange(Headers headers, string exchangeMic, string exchangeAcronym)
+        {
+            Symbol = headers.Symbol;
+            Name = headers.Name;
+            Lastsale = headers.Lastsale;
+            Netchange = headers.Netchange;
+            Pctchange = headers.Pctchange;
+            MarketCap = headers.MarketCap;
+            Country = headers.Country;
+            Ipoyear = headers.Ipoyear;
+            Volume = headers.Volume;
+            Sector = headers.Sector;
+            Industry = headers.Industry;
+            Url = headers.Url;
+            ExchangeMic = exchangeMic;
+            ExchangeAcronym = exchangeAcronym;
+        }
+
+        public string ExchangeMic { get; set; }
+
+        public string ExchangeAcronym { get; set; }
+    }
+
     internal partial class Data
     {
         [JsonProperty("headers")]
@@ -85,7 +110,7 @@ namespace M5Finance
         public object DeveloperMessage { get; set; }
     }
 
-    public enum Country { Argentina, Australia, Bahamas, Belgium, Bermuda, Brazil, Canada, CaymanIslands, Chile, China, Colombia, CostaRica, Country, Curacao, Cyprus, Denmark, Empty, Finland, France, Germany, Greece, Guernsey, HongKong, India, Indonesia, Ireland, IsleOfMan, Israel, Italy, Japan, Jersey, Jordan, Kazakhstan, Luxembourg, Macau, Malaysia, Malta, Mexico, Monaco, Netherlands, NewZealand, Norway, Panama, Peru, Philippines, Portugal, PuertoRico, Russia, Singapore, SouthAfrica, SouthKorea, Spain, Sweden, Switzerland, Taiwan, Turkey, UnitedArabEmirates, UnitedKingdom, UnitedStates, Uruguay };
+    public enum Country { Argentina, Australia, Bahamas, Belgium, Bermuda, Brazil, Canada, CaymanIslands, Chile, China, Colombia, CostaRica, Country, Curacao, Cyprus, Denmark, Empty, Finland, France, Germany, Greece, Guernsey, HongKong, India, Indonesia, Ireland, IsleOfMan, Israel, Italy, Japan, Jersey, Jordan, Kazakhstan, Luxembourg, Macau, Malaysia, Malta, Mexico, Monaco, Netherlands, NewZealand, Norway, Panama, Peru, Philippines, Portugal, PuertoRico, Russia, Singapore, SouthAfrica, SouthKorea, Spain, Sweden, Switzerland, Taiwan, Thailand, Turkey, UnitedArabEmirates, UnitedKingdom, UnitedStates, Uruguay };
 
     public enum IPOYearEnum { Empty, IpoYear };
 
@@ -247,6 +272,8 @@ namespace M5Finance
                     return Country.Switzerland;
                 case "Taiwan":
                     return Country.Taiwan;
+                case "Thailand":
+                    return Country.Thailand;
                 case "Turkey":
                     return Country.Turkey;
                 case "United Arab Emirates":
@@ -258,7 +285,7 @@ namespace M5Finance
                 case "Uruguay":
                     return Country.Uruguay;
             }
-            throw new Exception("Cannot unmarshal type Country");
+            throw new Exception($"Cannot unmarshal type Country { value }");
         }
 
         public override void WriteJson(JsonWriter writer, object untypedValue, JsonSerializer serializer)

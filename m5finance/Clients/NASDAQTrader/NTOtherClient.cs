@@ -1,7 +1,7 @@
 ﻿using CsvHelper;
 using CsvHelper.Configuration;
+using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Net.Http;
@@ -34,7 +34,7 @@ namespace M5Finance
         public NTOtherClient()
         {
             _client = HttpInternal.Client;
-            
+
             var exchangeService = new ExchangeService();
 
             _exchanges = new Dictionary<string, Exchange>();
@@ -136,6 +136,11 @@ namespace M5Finance
             }
 
             return listOfSecurities;
+        }
+
+        public Task<IEnumerable<NasdaqSecuritiesExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym)
+        {
+            throw new NotImplementedException();
         }
     }
 }

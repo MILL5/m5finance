@@ -61,9 +61,7 @@ namespace M5Finance
 
         public override bool Equals(object obj)
         {
-            var other = obj as Security;
-
-            if (other == null)
+            if (!(obj is Security other))
                 return false;
 
             return other._ticker.Equals(_ticker) &&
