@@ -51,17 +51,17 @@ namespace M5Finance
             return listOfSecurities;
         }
 
-        public async Task<IEnumerable<NasdaqSecuritiesExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym)
+        public async Task<IEnumerable<NasdaqSecurityExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym)
         {
             var exchangeUrl = string.Concat(NASDAQ_SECURITIES_URL, EXCHANGE_QUERY, exchangeAcronym);
 
             var file = await _client.DownloadFileAsStringAsync(exchangeUrl);
 
-            var listOfSecurities = new List<NasdaqSecuritiesExchange>(10000);
+            var listOfSecurities = new List<NasdaqSecurityExchange>(10000);
 
             foreach (var row in NasdaqSecurities.FromJson(file).Data.Rows)
             {
-                var securityExchange = new NasdaqSecuritiesExchange(row, exchangeMic, exchangeAcronym);
+                var securityExchange = new NasdaqSecurityExchange(row, exchangeMic, exchangeAcronym);
 
                 listOfSecurities.Add(securityExchange);
             }

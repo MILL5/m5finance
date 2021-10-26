@@ -138,7 +138,7 @@ namespace M5Finance
             return listOfSecurities;
         }
 
-        public Task<IEnumerable<NasdaqSecuritiesExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym)
+        public Task<IEnumerable<NasdaqSecurityExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym)
         {
             throw new NotImplementedException();
         }

@@ -7,6 +7,6 @@ namespace M5Finance
     {
         Task<IEnumerable<Security>> GetSecuritiesAsync();
 
-        Task<IEnumerable<NasdaqSecuritiesExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym);
+        Task<IEnumerable<NasdaqSecurityExchange>> GetSecuritiesByExchangeAsync(string exchangeMic, string exchangeAcronym);
     }
 }
