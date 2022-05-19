@@ -114,7 +114,29 @@ namespace M5Finance
 
     public enum IPOYearEnum { Empty, IpoYear };
 
-    public enum Sector { BasicIndustries, CapitalGoods, ConsumerDurables, ConsumerNonDurables, ConsumerServices, Empty, Energy, Finance, HealthCare, Miscellaneous, PublicUtilities, Sector, Technology, Transportation };
+    public enum Sector { 
+        Empty,
+        BasicIndustries,
+        BasicMaterials,
+        CapitalGoods,
+        ConsumerDiscretionary,
+        ConsumerDurables,
+        ConsumerNonDurables,
+        ConsumerServices,
+        ConsumerStaples,
+        Energy,
+        Finance,
+        HealthCare,
+        Industrials,
+        Miscellaneous,
+        PublicUtilities,
+        RealEstate,
+        Sector,
+        Technology,
+        Telecommunications,
+        Transportation,
+        Utilities
+    };
 
     public partial struct IPOYearUnion
     {
@@ -588,30 +610,44 @@ namespace M5Finance
                     return Sector.Empty;
                 case "Basic Industries":
                     return Sector.BasicIndustries;
+                case "Basic Materials":
+                    return Sector.BasicMaterials;
                 case "Capital Goods":
                     return Sector.CapitalGoods;
+                case "Consumer Discretionary":
+                    return Sector.ConsumerDiscretionary;
                 case "Consumer Durables":
                     return Sector.ConsumerDurables;
                 case "Consumer Non-Durables":
                     return Sector.ConsumerNonDurables;
                 case "Consumer Services":
                     return Sector.ConsumerServices;
+                case "Consumer Staples":
+                    return Sector.ConsumerStaples;
                 case "Energy":
                     return Sector.Energy;
                 case "Finance":
                     return Sector.Finance;
                 case "Health Care":
                     return Sector.HealthCare;
+                case "Industrials":
+                    return Sector.Industrials;
                 case "Miscellaneous":
                     return Sector.Miscellaneous;
                 case "Public Utilities":
                     return Sector.PublicUtilities;
+                case "Real Estate":
+                    return Sector.RealEstate;
                 case "Sector":
                     return Sector.Sector;
                 case "Technology":
                     return Sector.Technology;
+                case "Telecommunications":
+                    return Sector.Telecommunications;
                 case "Transportation":
                     return Sector.Transportation;
+                case "Utilities":
+                    return Sector.Utilities;
             }
             throw new Exception("Cannot unmarshal type Sector");
         }
