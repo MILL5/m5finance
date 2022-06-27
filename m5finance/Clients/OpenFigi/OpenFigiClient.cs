@@ -21,12 +21,12 @@ namespace M5Finance
 
         public IOpenFigiLimits CurrentLimits => _limits;
 
-        public OpenFigiClient(string apiKey)
+        public OpenFigiClient(string openFigiApiKey)
         {
-            CheckIsNotNullOrWhitespace(nameof(apiKey), apiKey);
+            CheckIsNotNullOrWhitespace(nameof(openFigiApiKey), openFigiApiKey);
             _limits = _limitsWithKey;
             _client = HttpInternal.Client;
-            _client.DefaultRequestHeaders.Add(OPENFIGI_API_KEY_HEADER_NAME, apiKey);
+            _client.DefaultRequestHeaders.Add(OPENFIGI_API_KEY_HEADER_NAME, openFigiApiKey);
         }
 
         /// <summary>
