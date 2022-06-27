@@ -110,7 +110,7 @@ namespace M5Finance
         public object DeveloperMessage { get; set; }
     }
 
-    public enum Country { Argentina, Australia, Bahamas, Belgium, Bermuda, Brazil, Canada, CaymanIslands, Chile, China, Colombia, CostaRica, Country, Curacao, Cyprus, Denmark, Empty, Finland, France, Germany, Greece, Guernsey, HongKong, India, Indonesia, Ireland, IsleOfMan, Israel, Italy, Japan, Jersey, Jordan, Kazakhstan, Luxembourg, Macau, Malaysia, Malta, Mexico, Monaco, Netherlands, NewZealand, Norway, Panama, Peru, Philippines, Portugal, PuertoRico, Russia, Singapore, SouthAfrica, SouthKorea, Spain, Sweden, Switzerland, Taiwan, Thailand, Turkey, UnitedArabEmirates, UnitedKingdom, UnitedStates, Uruguay };
+    public enum Country { Argentina, Australia, Bahamas, Belgium, Bermuda, Brazil, Canada, CaymanIslands, Chile, China, Colombia, CostaRica, Country, Curacao, Cyprus, Denmark, Empty, Finland, France, Germany, Gibraltar, Greece, Guernsey, HongKong, India, Indonesia, Ireland, IsleOfMan, Israel, Italy, Japan, Jersey, Jordan, Kazakhstan, Luxembourg, Macau, Malaysia, Malta, Mexico, Monaco, Netherlands, NewZealand, Norway, Panama, Peru, Philippines, Portugal, PuertoRico, Russia, Singapore, SouthAfrica, SouthKorea, Spain, Sweden, Switzerland, Taiwan, Thailand, Turkey, UnitedArabEmirates, UnitedKingdom, UnitedStates, Uruguay };
 
     public enum IPOYearEnum { Empty, IpoYear };
 
@@ -224,6 +224,8 @@ namespace M5Finance
                     return Country.France;
                 case "Germany":
                     return Country.Germany;
+                case "Gibraltar":
+                    return Country.Gibraltar;
                 case "Greece":
                     return Country.Greece;
                 case "Guernsey":
@@ -379,6 +381,9 @@ namespace M5Finance
                     return;
                 case Country.Germany:
                     serializer.Serialize(writer, "Germany");
+                    return;
+                case Country.Gibraltar:
+                    serializer.Serialize(writer, "Gibraltar");
                     return;
                 case Country.Greece:
                     serializer.Serialize(writer, "Greece");
