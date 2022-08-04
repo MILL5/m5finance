@@ -53,7 +53,7 @@ jobs:
 
       - name: Build
         run: |
-          dotnet build m5finance.sln --no-restore /WarnAsError --configuration Release
+          dotnet build m5finance.sln --no-restore --configuration Release
 
       - name: Test
         env:
