@@ -17,6 +17,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetSecuritiesTestAsync()
         {
             var securities = await _service.GetSecuritiesAsync();
@@ -26,6 +27,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetTickersTestAsync()
         {
             var tickers = await _service.GetTickersAsync();
@@ -37,6 +39,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetExchangeMicCodesTestAsync()
         {
             var exchanges = await _service.GetExchangeMicCodesAsync();

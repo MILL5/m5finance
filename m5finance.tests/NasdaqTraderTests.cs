@@ -19,6 +19,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetNasdaqSecuritiesTestAsync()
         {
             var securities = await _client.GetSecuritiesAsync();
@@ -28,6 +29,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetOtherSecuritiesTestAsync()
         {
             var securities = await _otherClient.GetSecuritiesAsync();

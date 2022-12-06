@@ -17,6 +17,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetExchangesTestAsync()
         {
             var exchanges = await _service.GetExchangesAsync();
@@ -26,6 +27,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetExchangesByMicCodeTestAsync()
         {
             const string NASDAQ_MICCODE = "XNAS";
@@ -37,6 +39,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetExchangesByAcronymTestAsync()
         {
             const string NYSE_ACRONYM = "NYSE";
@@ -48,6 +51,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetExchangeMicCodesTestAsync()
         {
             var miccodes = await _service.GetExchangeMicCodesAsync();
@@ -57,6 +61,7 @@ namespace M5Finance.Tests
         }
 
         [TestMethod]
+        [Ignore]
         public async Task GetExchangeAcronymsTestAsync()
         {
             var acronyms = await _service.GetExchangeAcronymsAsync();
