@@ -41,5 +41,21 @@ namespace M5Finance.Tests
             Assert.AreEqual(exchangeMic, security.ExchangeMic);
             Assert.AreEqual(exchangeAcronym, security.ExchangeAcronym);
         }
+
+        [TestMethod]
+        public async Task ValidateTickersWhiteSpacesGetSecuritiesByExchangeTestAsync()
+        {
+            const string EXCHANGE_MIC = "XNYS";
+            const string EXCHANGE_ACRONYM = "NYSE";
+
+            var securities = await _client.GetSecuritiesByExchangeAsync(EXCHANGE_MIC, EXCHANGE_ACRONYM);
+
+            Assert.IsNotNull(securities);
+            Assert.IsTrue(securities.Any());
+
+            var tickersWithLeadingTrailingWhiteSpaces = securities.Where(x => x.Symbol.StartsWith(" ") || x.Symbol.EndsWith(" ")).Count();
+
+            Assert.AreEqual(tickersWithLeadingTrailingWhiteSpaces, 0);
+        }
     }
 }
