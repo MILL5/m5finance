@@ -61,8 +61,10 @@ namespace M5Finance
 
             foreach (var row in NasdaqSecurities.FromJson(file).Data.Rows)
             {
+                row.Symbol = row.Symbol.Trim();
+                
                 var securityExchange = new NasdaqSecurityExchange(row, exchangeMic, exchangeAcronym);
-
+                
                 listOfSecurities.Add(securityExchange);
             }
 
